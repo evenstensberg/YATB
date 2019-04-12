@@ -24,12 +24,13 @@ done = False
 
 def poll_cb(sc):
     dat = api.user_timeline()
+    done = False
     for i in dat:
         t = getattr(i, 'text')
         if t == 'thank you, next spotify':
             song = thank_you_next(True)
             title = song['item']['external_urls']['spotify']
-            text = "Howdy buckaroo 🤠\n playing: " + title
+            text = "Howdy buckaroo 🤠 playing: " + title
             api.update_status(text, getattr(i, 'id'))
             done = True
     print("Polling stuff...")
